@@ -3,7 +3,6 @@ require.config({
   paths: {
     jquery: 'lib/jquery/jquery',
     text: 'lib/requirejs-text/text',
-    base64: 'lib/base64/base64.min',
     hogan: 'lib/hogan/web/builds/2.0.0/hogan-2.0.0.amd',
     hgn: 'lib/requirejs-hogan-plugin/hgn',
     json: 'lib/requirejs-plugins/src/json',
@@ -74,6 +73,10 @@ require.config({
     name: "less",
     location: "lib/require-less",
     main: "less"
+  },{
+    name: "base64",
+    location: "lib/base64",
+    main: "base64"
   }],
   shim: {
     jquery: {

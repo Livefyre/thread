@@ -7,7 +7,8 @@
   baseUrl: '..',
   name: "thread",
   include: [
-    'almond'
+    'almond',
+    'css'
   ],
   stubModules: ['text', 'hgn'],
   out: "../dist/thread.min.js",
