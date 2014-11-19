@@ -38,10 +38,11 @@ var ContentThreadView = function (opts) {
     this._isRoot = false;
     this._isLeaf = false;
 
+    var isContentVisible = opts.isContentVisible || isPublicContent;
     if (!this.content.parentId) {
         this._isRoot = true;
     }
-    if (this._maxNestLevel === this._nestLevel || (this._isRoot && this.content.replies.filter(isPublicContent).length === 0)) {
+    if (this._maxNestLevel === this._nestLevel || (this._isRoot && this.content.replies.filter(isContentVisible).length === 0)) {
         this._isLeaf = true;
     }
     this._maxVisibleItems = opts.maxVisibleItems || 2;
@@ -56,7 +57,7 @@ var ContentThreadView = function (opts) {
         order: opts.order || ContentRepliesView.ORDERS.CREATEDAT_DESCENDING,
         maxVisibleItems: this._isRoot ? this._maxVisibleItems : Infinity,
         maxNestLevel: this._maxNestLevel,
-        contentIsVisible: isPublicContent,
+        contentIsVisible: isContentVisible,
         nestLevel: this._nestLevel+1,
         queueInitial: opts.queueInitial,
         isRoot: false,
@@ -67,7 +68,7 @@ var ContentThreadView = function (opts) {
     });
 
     this.content.on('reply', function (reply) {
-        if (isPublicContent(reply)) {
+        if (isContentVisible(reply)) {
             // A content is no longer a leaf when publicly replied to
             this.$el.removeClass(this.CLASSES.leafNode);
         }
