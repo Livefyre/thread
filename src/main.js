@@ -4,7 +4,7 @@ var ListView = require('streamhub-sdk/views/list-view');
 var CompositeView = require('view/composite-view');
 var ContentViewFactory = require('streamhub-sdk/content/content-view-factory');
 var ContentRepliesView = require('thread/content-replies-view');
-var threadStyles = require('less!thread/css/thread.less');
+//var threadStyles = require('less!thread/css/thread.less');
 
 'use strict';
 

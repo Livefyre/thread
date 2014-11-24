@@ -3,7 +3,7 @@
 var inherits = require('inherits');
 var BaseShowMoreButton = require('streamhub-sdk/views/show-more-button');
 var template = require('hgn!thread/templates/show-more-button');
-var showMoreButtonStyles = require('less!thread/css/show-more-button.less');
+//var showMoreButtonStyles = require('less!thread/css/show-more-button.less');
 
 var ShowMoreButton = function (opts) {
     BaseShowMoreButton.call(this, opts);
