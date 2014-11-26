@@ -62,6 +62,7 @@ var ContentThreadView = function (opts) {
         queueInitial: opts.queueInitial,
         isRoot: false,
         createReplyView: opts.createReplyView ? opts.createReplyView.bind(this) : function (opts) {
+            opts.isContentVisible = isContentVisible;
             opts.contentViewFactory = this._contentViewFactory;
             return new ContentThreadView(opts);
         }.bind(this)
