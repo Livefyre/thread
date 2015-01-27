@@ -8,10 +8,15 @@ var ListView = require('streamhub-sdk/views/list-view');
 
 describe('ContentThreadView', function () {
     var now = new Date();
-    var content = new LivefyreContent();
-    content.id = 'a';
-    content.body = 'hi';
-    content.author = { id: 'jimmy' };
+    var content = createContent();
+
+    function createContent() {
+        var content = new LivefyreContent();
+        content.id = 'a';
+        content.body = 'hi';
+        content.author = { id: 'jimmy' };
+        return content;
+    }
 
     afterEach(function () {
         content.parentId = undefined;
@@ -63,15 +68,37 @@ describe('ContentThreadView', function () {
     });
 
     it('can be constructed with opts.isContentVisible and use it instead of the default', function () {
-        var spy = jasmine.createSpy('isContentVisible');
-        content.replies = [{}];
+        // Test if reply is always visible
+        var isContentVisibleTrue = jasmine.createSpy('isContentVisibleTrue').andCallFake(function () {
+            return true;
+        });
+        var content = createContent();
+        content.replies = [createContent()];
         var threadView = new ContentThreadView({
             content: content,
-            isContentVisible: spy
+            isContentVisible: isContentVisibleTrue
         });
 
         threadView.render();
-        expect(spy).toHaveBeenCalled();
+        expect(isContentVisibleTrue.callCount).toBe(2);
+        // Since reply is visible, it's not leaf node.
+        expect(threadView.$el.hasClass(threadView.CLASSES.leafNode)).toBe(false);
+
+        // Now to test if isContentVisible returns false.
+        var isContentVisibleFalse = jasmine.createSpy('isContentVisibleFalse').andCallFake(function () {
+            return false;
+        });
+        var content2 = createContent();
+        content2.replies = [createContent()];
+        var threadView2 = new ContentThreadView({
+            content: content2,
+            isContentVisible: isContentVisibleFalse
+        });
+
+        threadView2.render();
+        expect(isContentVisibleFalse.callCount).toBe(2);
+        // Since reply is NOT visible, it's a leaf node.
+        expect(threadView2.$el.hasClass(threadView.CLASSES.leafNode)).toBe(true);
     });
 
     describe('_repliesView', function () {
