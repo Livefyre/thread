@@ -62,6 +62,18 @@ describe('ContentThreadView', function () {
         expect(threadView._maxNestLevel).toBe(2);
     });
 
+    it('can be constructed with opts.isContentVisible and use it instead of the default', function () {
+        var spy = jasmine.createSpy('isContentVisible');
+        content.replies = [{}];
+        var threadView = new ContentThreadView({
+            content: content,
+            isContentVisible: spy
+        });
+
+        threadView.render();
+        expect(spy).toHaveBeenCalled();
+    });
+
     describe('_repliesView', function () {
         var threadView;
 
