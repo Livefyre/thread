@@ -21,6 +21,8 @@ var threadStyles = require('less!thread/css/thread.less');
  *        root of the thread
  * @param [opts.contentViewFactory] {ContentViewFactory} A factory to create
  *        ContentViews for the root content
+ * @param [opts.isContentVisible] {Function} A function that, given a piece of
+ *         content, returns true if the content should be shown and false otherwise
  */
 var ContentThreadView = function (opts) {
     opts = opts || {};
