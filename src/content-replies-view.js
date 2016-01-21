@@ -178,17 +178,20 @@ ContentRepliesView.prototype._addReplies = function (replies) {
         .filter(function (content) {
             return self._contentIsVisible(content);
         })
+        // Create views for the visible replies because the comparators expect
+        // content views.
+        .map(function (content) {
+            return self._createReplyView(content);
+        })
         .sort(this.comparator);
 
     if (!this._showQueueHeader) {
         for (var i=replies.length-1; i > -1; i--) {
-            var reply = replies[i];
-            this.pushMore(this._createReplyView(reply));
+            this.pushMore(replies[i]);
         }
     } else {
         for (var i=0; i < replies.length; i++) {
-            var reply = replies[i];
-            this.pushMore(this._createReplyView(reply));
+            this.pushMore(replies[i]);
         }
     }
     this._listView.showMoreButton.setCount(this.content.replies.length - this._maxVisibleItems);
