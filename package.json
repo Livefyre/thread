@@ -6,7 +6,7 @@
     "name": "Ryan Cheung",
     "email": "ryanc@livefyre.com"
   },
-  "version": "0.1.1",
+  "version": "0.1.2",
   "dependencies": {
     "bower": "*",
     "tmp": "0.0.23",
@@ -30,8 +30,8 @@
   "devDependencies": {
     "http-server": "*",
     "less": "1.6.2",
-    "jshint": "~2.1.0",
-    "jsdoc": "git://github.com/jsdoc3/jsdoc.git",
+    "jshint": "2.9.7",
+    "jsdoc": "3.6.3",
     "karma": "~0.10.5",
     "karma-chrome-launcher": "~0.1.0",
     "karma-coffee-preprocessor": "~0.1.0",
